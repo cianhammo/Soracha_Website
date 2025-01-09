@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background: #fff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .intro {
+            padding: 4rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards;
+        }
+
+        .intro h1 {    /* Add this section */
+    font-size: 4rem;
+}
+.intro p {
+    margin-bottom: 2rem;  /* Adds space after each paragraph */
+}
+
+        .artwork-container {
+            padding: 2rem;
+        }
+
+        .artwork {
+            margin: 6rem auto;
+            max-width: 1400px;
+            opacity: 0;
+            transform: translateY(20px);
+            display: grid;
+            grid-template-columns: minmax(300px, 1fr) 2fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .artwork.visible {
+            animation: fadeIn 1s forwards;
+        }
+
+        .artwork-image {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            grid-column: 2;
+        }
+
+        .artwork:hover .artwork-image {
+            transform: scale(1.02);
+        }
+
+        .artwork-details {
+            padding: 0 1rem;
+            grid-column: 1;
+        }
+
+        .artwork-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .artwork-description {
+            color: #666;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .artwork {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin: 4rem auto;
+            }
+
+            .artwork-image {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .artwork-details {
+                grid-column: 1;
+                grid-row: 2;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="intro">
+        <h1>Sorcha Hamilton's Portfolio</h1>
+        <p>Sorcha Hamilton is an artist based in County Galway, Ireland. Much of her work experiments with solitary scenes rarely involved figures to create a more isolating experience.</p>
+        <p>This project focuses on exploring one site. The place where this series is based is in the woods behind her family home. The work explores the peace and loneliness that exists when living in rural Ireland, with elements of Christianity and Paganism to show the spiritual aspects of living in quiet thought and solitude. These elements come through in the aesthetic, and the calming and ritualistic making of the work. Much of the exploration behind these pieces comes from walking and harvesting the overgrown land of some of the natural resources. All the materials that make the end-product are from this site; natural materials can bend and change over time, which suggests an added aspect of change and growth in the work itself.</p>
+    </section>
+
+    <div class="artwork-container">
+        <article class="artwork">
+            <div class="artwork-details">
+                <h2 class="artwork-title">Soiled maps</h2>
+                <p class="artwork-description">Soil and charcoal on canvas</p>
+            </div>
+            <img src="3paintings.jpg" alt="Wide artwork" class="artwork-image" data-filename="1.jpg">
+        </article>
+
+        <article class="artwork">
+            <div class="artwork-details">
+                <h2 class="artwork-title">Bridge with Topographs</h2>
+                <p class="artwork-description">Oil and soil on wood. 25cm in diameter</p>
+            </div>
+            <img src="log1.png" alt="Wide artwork" class="artwork-image">
+        </article>
+
+        <article class="artwork">
+            <div class="artwork-details">
+                <h2 class="artwork-title">Bog Perspective with Topographs</h2>
+                <p class="artwork-description">Oil and soil on wood. 23cm diameter</p>
+            </div>
+            <img src="log2.png" alt="Wide artwork" class="artwork-image">
+        </article>
+
+
+
+        <article class="artwork">
+            <div class="artwork-details">
+                <h2 class="artwork-title">Splitting apart</h2>
+                <p class="artwork-description">Oil on wood. 25cm diameter</p>
+            </div>
+            <img src="log3.png" alt="Wide artwork" class="artwork-image">
+        </article>
+
+
+
+        <article class="artwork">
+            <div class="artwork-details">
+                <h2 class="artwork-title">Ground Perspective</h2>
+                <p class="artwork-description">Oil on wood. 25cm diameter.</p>
+            </div>
+            <img src="log4.png" alt="Wide artwork" class="artwork-image">
+        </article>
+
+
+
+
+
+        <article class="artwork">
+            <div class="artwork-details">
+                <h2 class="artwork-title">Ceramic Prints</h2>
+                <p class="artwork-description">Ceramics and soil.</p>
+            </div>
+            <img src="wide.jpg" alt="Wide artwork" class="artwork-image">
+        </article>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.artwork').forEach(artwork => {
+            observer.observe(artwork);
+        });
+    </script>
+</body>
+</html>
